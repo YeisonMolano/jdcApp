@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Registro_y_control"
+        tools:targetApi="31">
+        <activity
+            android:name=".View_programs_general"
+            android:exported="false" />
+        <activity
+            android:name=".Estudiantes_pendientes"
+            android:exported="false" />
+        <activity
+            android:name=".Ver_estudiantes"
+            android:exported="false" />
+        <activity
+            android:name=".Menu_estudiantes"
+            android:exported="false" />
+        <activity
+            android:name=".Menu_apoyo"
+            android:exported="false" />
+        <activity
+            android:name=".Menu_admin"
+            android:exported="false" />
+        <activity
+            android:name=".Inscripcion_estudiantes"
+            android:exported="false" />
+        <activity
+            android:name=".Formulario_inscripcion_docentes"
+            android:exported="false" />
+        <activity
+            android:name=".Registro"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityFormEstudiantes"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityFormDocentes"
+            android:exported="false" />
+        <activity
+            android:name=".CrearPersona"
+            android:exported="false" />
+        <activity
+            android:name=".Bienvenida"
+            android:exported="false" />
+        <activity
+            android:name=".SlashPrimario"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/fondo_deg"
+    tools:context=".Ver_estudiantes">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="414dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="88dp"
+        android:text="Menu estudiantes"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/estudiantes_pendientes"
+        android:layout_width="313dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#D3C972"
+        android:ems="10"
+        android:onClick="viewStudents"
+        android:padding="18dp"
+        android:text="Estudiantes pendientes"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        app:cornerRadius="25dp"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.262" />
+
+    <Button
+        android:id="@+id/students_active"
+        android:layout_width="313dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#D3C972"
+        android:ems="10"
+        android:onClick="ingresar"
+        android:padding="18dp"
+        android:text="Estudiantes activos"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        app:cornerRadius="25dp"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.512" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
