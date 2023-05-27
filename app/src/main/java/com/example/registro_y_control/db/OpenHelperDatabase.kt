@@ -234,15 +234,33 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
         }
     }
 
-    fun getAllProgramas(): List<Any>{
+    fun getAllProgramas(): List<Map<*, *>>{
         var getAllPrograms = "SElECT * FROM $TABLE_PROGRAM;"
         val db = this.readableDatabase
-        val items = mutableListOf("Seleccione el programa")
+        val items = mutableListOf<Map<*, *>>()
+        var item : Map<*, *>
         var programs = db.rawQuery(getAllPrograms, null)
         if(programs.moveToFirst()){
             do {
-                items.add(programs.getString(1))
+                item = mapOf("idProgram" to programs.getInt(0), "nameProgram" to programs.getString(1), "numSemester" to programs.getInt(2),
+                "numCredits" to programs.getInt(3))
+                items.add(item)
             }while (programs.moveToNext())
+        }else{
+            println("La tabla esta vacía")
+        }
+        return items;
+    }
+
+    fun getAllFacultades(): List<Any>{
+        var getAllFaculty = "SElECT * FROM $TABLE_FACULTY;"
+        val db = this.readableDatabase
+        val items = mutableListOf("Seleccione la facultad")
+        var faculty = db.rawQuery(getAllFaculty, null)
+        if(faculty.moveToFirst()){
+            do {
+                items.add(faculty.getString(1))
+            }while (faculty.moveToNext())
         }else{
             println("La tabla esta vacía")
         }
@@ -263,16 +281,28 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
         db.execSQL(createFaculty)
     }
 
-    fun createProgram(idProgram: Int, nameProgram: String, numSemester: Int, numCredits: Int){
-        val createProgram = "INSERT INTO  $TABLE_PROGRAM VALUES ($idProgram, '$nameProgram', $numSemester, $numCredits);"
-        val db = this.writableDatabase
-        db.execSQL(createProgram)
+    fun createProgram(nameProgram: String, numSemester: Int, numCredits: Int): Boolean{
+        try {
+            val createProgram = "INSERT INTO  $TABLE_PROGRAM (nameProgram, numSemester, numCredits) VALUES ('$nameProgram', $numSemester, $numCredits);"
+            val db = this.writableDatabase
+            db.execSQL(createProgram)
+            return true;
+        }catch (error: Exception){
+            return false;
+        }
     }
 
-    fun createCourse(idCourse: Int, nameCourse: String, semesterLocation: Int, numCredits: Int){
-        val createCourse = "INSERT INTO Course VALUES ($idCourse, '$nameCourse', $semesterLocation, $numCredits);"
-        val db = this.writableDatabase
-        db.execSQL(createCourse)
+
+
+    fun createCourse(nameCourse: String, semesterLocation: Int, numCredits: Int): Boolean{
+        try {
+            val createCourse = "INSERT INTO $TABLE_COURSE (nameCourse, semesterLocation, numCredits) VALUES ('$nameCourse', $semesterLocation, $numCredits);"
+            val db = this.writableDatabase
+            db.execSQL(createCourse)
+            return true;
+        }catch (e: Exception){
+            return false;
+        }
     }
 
     fun createTeacher(tittle: String, experience: Int, program: String, numDocument: Int){

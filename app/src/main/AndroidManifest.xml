@@ -12,6 +12,32 @@
         android:theme="@style/Theme.Registro_y_control"
         tools:targetApi="31">
         <activity
+            android:name=".View_programas_activos"
+            android:exported="false" />
+        <activity
+            android:name=".Nuevo_curso"
+            android:exported="false" />
+        <activity
+            android:name=".Nuevo_programa"
+            android:exported="false" />
+        <activity
+            android:name=".pruebaUno"
+            android:exported="false"
+            android:label="@string/title_activity_prueba_uno"
+            android:theme="@style/Theme.Registro_y_control.NoActionBar" />
+        <activity
+            android:name=".View_docentes_general"
+            android:exported="false" />
+        <activity
+            android:name=".View_liquidacion"
+            android:exported="false" />
+        <activity
+            android:name=".View_horario_actual"
+            android:exported="false" />
+        <activity
+            android:name=".View_materias_actuales"
+            android:exported="false" />
+        <activity
             android:name=".View_programs_general"
             android:exported="false" />
         <activity

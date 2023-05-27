@@ -35,7 +35,7 @@
         app:srcCompat="@mipmap/logoo" />
 
     <Button
-        android:id="@+id/botonCrearPersona"
+        android:id="@+id/createNewProgram"
         android:layout_width="158dp"
         android:layout_height="68dp"
         android:backgroundTint="#7BBF65"
@@ -100,7 +100,7 @@
         app:layout_constraintVertical_bias="0.766" />
 
     <EditText
-        android:id="@+id/lastName"
+        android:id="@+id/numCreditsOfCourseCreate"
         android:layout_width="320dp"
         android:layout_height="45dp"
         android:background="#8094E4E4"

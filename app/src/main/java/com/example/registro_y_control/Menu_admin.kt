@@ -22,4 +22,8 @@ class Menu_admin : AppCompatActivity() {
             startActivity(/* intent = */ it)
         }
     }
+
+    fun view_docentes_general(view: View){
+
+    }
 }

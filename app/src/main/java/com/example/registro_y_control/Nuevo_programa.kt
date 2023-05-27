@@ -1,0 +1,47 @@
+package com.example.registro_y_control
+
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Spinner
+import android.widget.Toast
+import com.example.registro_y_control.db.OpenHelperDatabase
+
+class Nuevo_programa : AppCompatActivity() {
+    lateinit var db: OpenHelperDatabase
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.nuevo_programa)
+
+        sharedPreferences = getSharedPreferences("datos_globales", Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
+        db = OpenHelperDatabase(this)
+
+        val spinner: Spinner = this.findViewById(R.id.spinnerFacultades)
+        val items = db.getAllFacultades()
+        var adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+    }
+
+    fun createNewProgram(view: View){
+        if(db.createProgram(this.findViewById<EditText>(R.id.nameProgramCreate).text.toString(),
+        this.findViewById<EditText>(R.id.numSemesterOfProgram).text.toString().toInt(),
+        this.findViewById<EditText>(R.id.numCreditsCreate).text.toString().toInt())){
+            editor.putInt("idProgramNew", db.findIdProgramByName(this.findViewById<EditText>(R.id.nameProgramCreate).text.toString()))
+            val intent: Intent = Intent(this, Nuevo_curso::class.java).also {
+                startActivity(/* intent = */ it)
+            }
+        }else{
+            Toast.makeText(this, "Error en la base de datos", Toast.LENGTH_SHORT).show()
+        }
+    }
+}

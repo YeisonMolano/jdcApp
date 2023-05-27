@@ -13,7 +13,7 @@
         android:layout_height="60dp"
         android:backgroundTint="#D3C972"
         android:ems="10"
-        android:onClick="ingresar"
+        android:onClick="view_docentes_general"
         android:padding="18dp"
         android:text="Docentes"
         android:textColor="#FFFFFF"

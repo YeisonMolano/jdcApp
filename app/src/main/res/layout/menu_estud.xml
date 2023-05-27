@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/fondo_deg">
@@ -12,7 +13,7 @@
         android:layout_height="63dp"
         android:backgroundTint="#D3C972"
         android:ems="10"
-        android:onClick="createRol"
+        android:onClick="view_materias_actuales"
         android:padding="18dp"
         android:text="Materias"
         android:textColor="#FFFFFF"
@@ -21,7 +22,7 @@
         app:iconTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.656"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.673" />
@@ -32,7 +33,7 @@
         android:layout_height="60dp"
         android:backgroundTint="#D3C972"
         android:ems="10"
-        android:onClick="ingresar"
+        android:onClick="view_horario_actual"
         android:padding="18dp"
         android:text="Horario"
         android:textColor="#FFFFFF"
@@ -41,7 +42,7 @@
         app:iconTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.653"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.764" />
@@ -52,7 +53,7 @@
         android:layout_height="60dp"
         android:backgroundTint="#D3C972"
         android:ems="10"
-        android:onClick="ingresar"
+        android:onClick="view_liquidacion"
         android:padding="18dp"
         android:text="Liquidacion"
         android:textColor="#FFFFFF"
@@ -61,7 +62,7 @@
         app:iconTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.642"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.853" />
@@ -95,8 +96,8 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="157dp"
-        android:layout_height="42dp"
+        android:layout_width="100dp"
+        android:layout_height="28dp"
         android:layout_margin="10dp"
         android:drawableLeft="@drawable/icono_pers"
         android:text="Estudiante"
@@ -105,7 +106,7 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />

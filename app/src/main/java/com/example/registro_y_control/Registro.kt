@@ -18,7 +18,7 @@ class Registro : AppCompatActivity() {
 
     fun createUser(view: View){
         var name = findViewById<EditText>(R.id.nameUser)
-        var lastName = findViewById<EditText>(R.id.lastName)
+        var lastName = findViewById<EditText>(R.id.numCreditsOfCourseCreate)
         var numIdentificacion = findViewById<EditText>(R.id.numIdentificacion)
         var email = findViewById<EditText>(R.id.email)
         var username = findViewById<EditText>(R.id.username)
