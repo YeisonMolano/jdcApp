@@ -22,11 +22,13 @@
             android:id="@+id/butonEditar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="edit"
             app:srcCompat="@android:drawable/ic_menu_edit" />
 
         <ImageButton
             android:id="@+id/butonDlelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="inactive"
             app:srcCompat="@android:drawable/ic_input_delete" />
     </TableRow>

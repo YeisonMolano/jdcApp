@@ -51,7 +51,7 @@
         android:layout_height="60dp"
         android:backgroundTint="#D3C972"
         android:ems="10"
-        android:onClick="ingresar"
+        android:onClick="viewProgramsInactive"
         android:padding="18dp"
         android:text="Programas inactivos"
         android:textColor="#FFFFFF"

@@ -12,6 +12,12 @@
         android:theme="@style/Theme.Registro_y_control"
         tools:targetApi="31">
         <activity
+            android:name=".View_programs_inactiv"
+            android:exported="false" />
+        <activity
+            android:name=".View_estudiantes_activos"
+            android:exported="false" />
+        <activity
             android:name=".View_programas_activos"
             android:exported="false" />
         <activity

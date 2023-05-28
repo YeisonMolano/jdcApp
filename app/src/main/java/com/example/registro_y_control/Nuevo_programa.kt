@@ -16,7 +16,7 @@ class Nuevo_programa : AppCompatActivity() {
     lateinit var db: OpenHelperDatabase
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
-
+    lateinit var facultys: List<Map<*, *>>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.nuevo_programa)
@@ -24,9 +24,15 @@ class Nuevo_programa : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("datos_globales", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
         db = OpenHelperDatabase(this)
+        facultys = db.getAllFacultades();
+        val items = mutableListOf<Any>("Elija la facultad")
+
+        facultys.forEach { facultad ->
+            items.add(facultad["nameFaculty"].toString())
+        }
 
         val spinner: Spinner = this.findViewById(R.id.spinnerFacultades)
-        val items = db.getAllFacultades()
+
         var adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
@@ -35,7 +41,8 @@ class Nuevo_programa : AppCompatActivity() {
     fun createNewProgram(view: View){
         if(db.createProgram(this.findViewById<EditText>(R.id.nameProgramCreate).text.toString(),
         this.findViewById<EditText>(R.id.numSemesterOfProgram).text.toString().toInt(),
-        this.findViewById<EditText>(R.id.numCreditsCreate).text.toString().toInt())){
+        this.findViewById<EditText>(R.id.numCreditsCreate).text.toString().toInt(),
+                db.findIdFacultyByName(findViewById<Spinner>(R.id.spinnerFacultades).selectedItem.toString()))){
             editor.putInt("idProgramNew", db.findIdProgramByName(this.findViewById<EditText>(R.id.nameProgramCreate).text.toString()))
             val intent: Intent = Intent(this, Nuevo_curso::class.java).also {
                 startActivity(/* intent = */ it)

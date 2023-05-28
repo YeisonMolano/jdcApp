@@ -46,7 +46,7 @@
         android:layout_height="60dp"
         android:backgroundTint="#D3C972"
         android:ems="10"
-        android:onClick="ingresar"
+        android:onClick="viewActives"
         android:padding="18dp"
         android:text="Estudiantes activos"
         android:textColor="#FFFFFF"

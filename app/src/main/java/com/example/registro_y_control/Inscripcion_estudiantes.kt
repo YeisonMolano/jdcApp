@@ -28,8 +28,13 @@ class Inscripcion_estudiantes : AppCompatActivity() {
         findViewById<EditText>(R.id.nameStudentFalse).setText(sharedPreferences.getString("name", "name"))
         findViewById<EditText>(R.id.lastNameStudentFalse).setText(sharedPreferences.getString("lastName", "lastName"))
 
+        val items = mutableListOf("Seleccione un programa")
+        val programs = db.getAllProgramas()
+        programs.forEach { program ->
+            items.add(program["nameProgram"].toString())
+        }
+
         val spinner: Spinner = this.findViewById(R.id.spinnerPrograma)
-        val items = db.getAllProgramas()
         var adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
@@ -54,7 +59,8 @@ class Inscripcion_estudiantes : AppCompatActivity() {
             var program = findViewById<Spinner>(R.id.spinnerPrograma).selectedItem.toString()
             var birtday = findViewById<EditText>(R.id.birthday).text.toString()
             var phone = findViewById<EditText>(R.id.phoneInscriptionStudent).text.toString()
-            db.createInscription(typeDocument, gender, birtday, sharedPreferences.getInt("numDocument", 0), program, phone)
+            println("${sharedPreferences.getInt("numDocument", 0)}, $typeDocument, $gender, $birtday, ${sharedPreferences.getInt("numDocument", 0)}, $program, $phone")
+            db.createInscription(sharedPreferences.getInt("numDocument", 0), typeDocument, gender, birtday, sharedPreferences.getInt("numDocument", 0), program, phone)
             Toast.makeText(this, "Se ha creado su solicitud con exito.", Toast.LENGTH_SHORT).show()
             val intent: Intent = Intent(this, Bienvenida::class.java).also {
                 startActivity(/* intent = */ it)
@@ -66,7 +72,7 @@ class Inscripcion_estudiantes : AppCompatActivity() {
 
     fun validateForm(): Boolean{
         return (!findViewById<Spinner>(R.id.spinner_typeDocument).selectedItem.toString().equals("Selecciona un tipo de documento") && !findViewById<Spinner>(R.id.spinner_genderStudent).selectedItem.toString().equals("Seleccione su genero")
-                && !findViewById<Spinner>(R.id.spinnerPrograma).selectedItem.toString().equals("Seleccione el programa") && !findViewById<EditText>(R.id.birthday).text.equals("") && !findViewById<EditText>(R.id.phoneInscriptionStudent).equals(""))
+                && !findViewById<Spinner>(R.id.spinnerPrograma).selectedItem.toString().equals("Seleccione un programa") && !findViewById<EditText>(R.id.birthday).text.equals("") && !findViewById<EditText>(R.id.phoneInscriptionStudent).equals(""))
     }
 
         fun mostrarDatePickerDialog(view: View) {

@@ -44,7 +44,10 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
                 "  idProgram INTEGER PRIMARY KEY," +
                 "  nameProgram VARCHAR(60)," +
                 "  numSemester INTEGER," +
-                "  numCredits INTEGER" +
+                "  numCredits INTEGER," +
+                "  statusProgram VARCHAR(30)," +
+                "  idFaculty INTEGER," +
+                "  FOREIGN KEY (idFaculty) REFERENCES $TABLE_FACULTY (idFaculty)" +
                 ");"
         val createTableCourse = "CREATE TABLE " + TABLE_COURSE + " (" +
                 "  idCourse INTEGER PRIMARY KEY," +
@@ -87,6 +90,10 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
                 "  statusStudent VARCHAR(30)," +
                 "  numDocument INTEGER," +
                 "  idProgram INTEGER," +
+                "  typeDocument VARCHAR(30)," +
+                "  gender VARCHAR(30)," +
+                "  birdthdate VARCHAR(30)," +
+                "  phone VARCHAR(10)," +
                 "  FOREIGN KEY (numDocument) REFERENCES $TABLE_USER (numDocument)," +
                 "  FOREIGN KEY (idProgram) REFERENCES $TABLE_PROGRAM (idProgram)" +
                 ");"
@@ -113,7 +120,6 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
             db.execSQL(createTableCurrentSemester)
         }
 
-        var insertFirstProgram = "INSERT INTO $TABLE_PROGRAM VALUES (1, 'Ingenieria de sistemas', 10, 1);"
         var insertFirst = "INSERT INTO $TABLE_AUTHORITIES values (1049658454, 'Yeison', 'Molano', 1);"
         var createAdmin = "INSERT INTO $TABLE_USER values (1049658454, 'Yeison Eduardo', 'Molano Lopez', 'kolokololoco79@gmail.com', 1049658454);"
         var insertRol = "INSERT INTO $TABLE_ROLE VALUES (1, 'ADMIN');"
@@ -127,8 +133,24 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
             db.execSQL(insertRolUser)
             db.execSQL(insertRolStudent)
             db.execSQL(insertRolTeacher)
-            db.execSQL(insertFirstProgram)
         }
+        val createFaculty = "INSERT INTO $TABLE_FACULTY (nameFaculty)" +
+                "VALUES ('FACULTAD DE CIENCIAS AGRARIAS Y AMBIENTALES');"
+        val createFaculty2 = "INSERT INTO $TABLE_FACULTY (nameFaculty)" +
+                "VALUES ('FACULTAD DE CIENCIAS SOCIALES Y ECONOMICAS');"
+        val createFaculty3 = "INSERT INTO $TABLE_FACULTY (nameFaculty)" +
+                "VALUES ('FACULTAD DE CIENCIAS DE LA EDUCACION, HUMANIDADES Y ARTE');"
+        val createFaculty4 = "INSERT INTO $TABLE_FACULTY (nameFaculty)" +
+                "VALUES ('FACULTAD DE CIENCIAS JURIDICAS Y POLITICAS INTERNACIONALES');"
+        val createFaculty5 = "INSERT INTO $TABLE_FACULTY (nameFaculty)" +
+                "VALUES ('FACULTAD DE INGENIERIA Y CIENCIAS BASICAS');"
+        if (db != null) {
+            db.execSQL(createFaculty)
+            db.execSQL(createFaculty2);
+            db.execSQL(createFaculty3);
+            db.execSQL(createFaculty4);
+            db.execSQL(createFaculty5);
+        };
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
@@ -234,32 +256,16 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
         }
     }
 
-    fun getAllProgramas(): List<Map<*, *>>{
-        var getAllPrograms = "SElECT * FROM $TABLE_PROGRAM;"
+    fun getAllFacultades(): List<Map<*,*>>{
+        var getAllFaculty = "SElECT * FROM $TABLE_FACULTY;"
         val db = this.readableDatabase
         val items = mutableListOf<Map<*, *>>()
         var item : Map<*, *>
-        var programs = db.rawQuery(getAllPrograms, null)
-        if(programs.moveToFirst()){
-            do {
-                item = mapOf("idProgram" to programs.getInt(0), "nameProgram" to programs.getString(1), "numSemester" to programs.getInt(2),
-                "numCredits" to programs.getInt(3))
-                items.add(item)
-            }while (programs.moveToNext())
-        }else{
-            println("La tabla esta vacía")
-        }
-        return items;
-    }
-
-    fun getAllFacultades(): List<Any>{
-        var getAllFaculty = "SElECT * FROM $TABLE_FACULTY;"
-        val db = this.readableDatabase
-        val items = mutableListOf("Seleccione la facultad")
         var faculty = db.rawQuery(getAllFaculty, null)
         if(faculty.moveToFirst()){
             do {
-                items.add(faculty.getString(1))
+                item = mapOf("idFaculty" to faculty.getInt(0), "nameFaculty" to faculty.getString(1))
+                items.add(item)
             }while (faculty.moveToNext())
         }else{
             println("La tabla esta vacía")
@@ -274,16 +280,10 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
         db.execSQL(createAuthority)
     }
 
-    fun createFaculty(nameFaculty: String){
-        val createFaculty = "INSERT INTO $TABLE_FACULTY (nameFaculty)" +
-                "VALUES ('$nameFaculty');"
-        val db = this.writableDatabase
-        db.execSQL(createFaculty)
-    }
-
-    fun createProgram(nameProgram: String, numSemester: Int, numCredits: Int): Boolean{
+    fun createProgram(nameProgram: String, numSemester: Int, numCredits: Int, idFaculty: Int): Boolean{
         try {
-            val createProgram = "INSERT INTO  $TABLE_PROGRAM (nameProgram, numSemester, numCredits) VALUES ('$nameProgram', $numSemester, $numCredits);"
+            val createProgram = "INSERT INTO  $TABLE_PROGRAM (nameProgram, numSemester, numCredits, idFaculty, statusProgram) VALUES ('$nameProgram', $numSemester, $numCredits, $idFaculty, 'ACTIVE');"
+            println(createProgram)
             val db = this.writableDatabase
             db.execSQL(createProgram)
             return true;
@@ -319,18 +319,23 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
         db.execSQL(assignedSubject)
     }
 
-    fun createInscription(typeDocument: String, gender: String, birdthdate: String, numDocument: Int, idProgram: String, phone: String){
-        val createInscription = "INSERT INTO $TABLE_INSCRIPTION (typeDocument, gender, birdthdate, status, numDocument, idProgram, phone)" +
-                "VALUES ('$typeDocument', '$gender', '$birdthdate', 'PENDING', $numDocument, ${findIdProgramByName(idProgram)}, '$phone');"
+    fun createInscription(idInscription: Int, typeDocument: String, gender: String, birdthdate: String, numDocument: Int, idProgram: String, phone: String){
+        val createInscription = "INSERT INTO $TABLE_INSCRIPTION (idInscription, typeDocument, gender, birdthdate, status, numDocument, idProgram, phone)" +
+                "VALUES ($idInscription, '$typeDocument', '$gender', '$birdthdate', 'PENDING', $numDocument, ${findIdProgramByName(idProgram)}, '$phone');"
         val db = this.writableDatabase
         db.execSQL(createInscription)
     }
 
-    fun createStudent(semester: Int, statusStudent: String, numDocumento: Int, idPrograma: Int){
-        val createStudent = "INSERT INTO $TABLE_STUDENT (semester, statusStudent, numDocumento, idPrograma)\n" +
-                "VALUES ($semester, '$statusStudent', $numDocumento, $idPrograma);"
-        val db = this.writableDatabase
-        db.execSQL(createStudent)
+    fun createStudent(idStudent: Int, semester: Int, statusStudent: String, numDocument: Int, idProgram: Int, typeDocument: String, gender: String, birthdate: String, phone: String): Boolean{
+        try {
+            val createStudent = "INSERT INTO $TABLE_STUDENT VALUES ($idStudent, $semester, '$statusStudent', $numDocument, $idProgram, '$typeDocument', '$gender', '$birthdate', '$phone');"
+            println(createStudent)
+            val db = this.writableDatabase
+            db.execSQL(createStudent)
+            return true;
+        }catch (e: Exception){
+            return false;
+        }
     }
 
     fun createCurrentSemester(status: String, idCourse: Int, idStudent: Int){
@@ -365,7 +370,7 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
                 items.add(findUserById(programs.getInt(5), 2))
             }while (programs.moveToNext())
         }else{
-            println("La tabla esta vacía")
+            println("La tabla esta vacía ñero")
         }
         return items;
     }
@@ -407,8 +412,141 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
     }
 
     fun updateRolToStudent(numDocument: Int){
+        println("Aca")
         var changeRole = "UPDATE $TABLE_AUTHORITIES SET idRole = 3 WHERE idAuthority = $numDocument;"
         val db = this.writableDatabase
         db.execSQL(changeRole)
+        findInscription(numDocument)
+        dropInsription(numDocument)
+    }
+
+    fun findInscription(numDocument: Int): Boolean{
+        var findInscription = "SELECT * FROM $TABLE_INSCRIPTION WHERE idInscription = $numDocument"
+        val db = this.readableDatabase
+        var faculty = db.rawQuery(findInscription, null)
+        if(faculty.moveToFirst()){
+            println("La creacion")
+            return createStudent(faculty.getInt(0), 1, "ACTIVE", faculty.getInt(0), faculty.getInt(7),
+                faculty.getString(2), faculty.getString(3), faculty.getString(4), faculty.getString(6))
+        }else{
+            return false;
+        }
+    }
+
+    fun findIdFacultyByName(name: String): Int{
+        val findFaculty = "SELECT idFaculty FROM $TABLE_FACULTY WHERE nameFaculty = '$name'"
+        val db = this.readableDatabase
+        var faculty = db.rawQuery(findFaculty, null)
+        if(faculty.moveToFirst()){
+            do {
+                return faculty.getInt(0)
+            }while (faculty.moveToNext())
+        }else{
+            return -1
+        }
+    }
+
+    fun findNameFacultyById(idFaculty: Int): String{
+        println(idFaculty)
+        var findNameFaculty = "SELECT nameFaculty FROM $TABLE_FACULTY WHERE idFaculty = $idFaculty"
+        val db = this.readableDatabase
+        var facultyFind = db.rawQuery(findNameFaculty, null)
+        if(facultyFind.moveToFirst()){
+            do {
+                return facultyFind.getString(0)
+            }while (facultyFind.moveToNext())
+        }else{
+            return "Este id no existe en la base de datos"
+        }
+    }
+
+    fun getStudentsActive(): List<Map<*, *>>{
+        var getStudentsActive = "SElECT * FROM $TABLE_STUDENT WHERE statusStudent = 'ACTIVE';"
+        val db = this.readableDatabase
+        val items = mutableListOf<Map<*, *>>()
+        var item : Map<*, *>
+        var students = db.rawQuery(getStudentsActive, null)
+        if(students.moveToFirst()){
+            do {
+                item = mapOf("idStudent" to students.getInt(0), "semester" to 1, "statusStudent" to "ACTIVE",
+                    "numDocument" to students.getInt(0), "idProgram" to students.getInt(7),
+                    "typeDocument" to students.getString(2), "gender" to students.getString(3),
+                    "birthdate" to students.getString(4), "phone" to students.getString(6), "name" to findUserById(students.getInt(0), 1)["name"] )
+                println(item)
+                items.add(item)
+            }while (students.moveToNext())
+        }else{
+            println("La tabla esta vacía")
+        }
+        return items;
+    }
+
+
+    //Metodos UPDATE
+    fun updateUser(numIdentificacion: Int, name: String, lastName: String, email: String, username: String, password: String){
+        var createUser = "UPDATE $TABLE_USER (name, lastName, email) values ('$name', '$lastName', '$email' WHERE numDocument = $numIdentificacion;"
+        val db = this.writableDatabase
+        db.execSQL(createUser)
+    }
+
+    fun updateStudent(idStudent: Int, semester: Int, statusStudent: String, numDocument: Int, idProgram: Int, typeDocument: String, gender: String, birthdate: String, phone: String): Boolean{
+        try {
+            val createStudent = "UPDATE $TABLE_STUDENT VALUES ($semester, '$statusStudent', $numDocument, $idProgram, '$typeDocument', '$gender', '$birthdate', '$phone') WHERE idStudent = $idStudent;"
+            println(createStudent)
+            val db = this.writableDatabase
+            db.execSQL(createStudent)
+            return true;
+        }catch (e: Exception){
+            return false;
+        }
+    }
+
+    fun updateProgram(){
+
+    }
+
+    //Metodos getAll
+    fun getAllProgramas(): List<Map<*, *>>{
+        var getAllPrograms = "SElECT * FROM $TABLE_PROGRAM;"
+        val db = this.readableDatabase
+        val items = mutableListOf<Map<*, *>>()
+        var item : Map<*, *>
+        var programs = db.rawQuery(getAllPrograms, null)
+        if(programs.moveToFirst()){
+            do {
+                item = mapOf("idProgram" to programs.getInt(0), "nameProgram" to programs.getString(1), "numSemester" to programs.getInt(2),
+                    "numCredits" to programs.getInt(3), "nameFaculty" to findNameFacultyById(programs.getInt(5)))
+                items.add(item)
+            }while (programs.moveToNext())
+        }else{
+            println("La tabla esta vacía")
+        }
+        return items;
+    }
+
+    fun getAllProgramasByStatus(status: String): List<Map<*, *>>{
+        var getAllPrograms = ""
+        if(status.equals("ACTIVE")){
+            getAllPrograms = "SElECT * FROM $TABLE_PROGRAM WHERE statusProgram = 'ACTIVE';"
+        }else if(status.equals("INACTIVE")){
+            getAllPrograms = "SElECT * FROM $TABLE_PROGRAM WHERE statusProgram = 'INACTIVE';"
+        }else{
+            return emptyList();
+        }
+        val db = this.readableDatabase
+        val items = mutableListOf<Map<*, *>>()
+        var item : Map<*, *>
+        var programs = db.rawQuery(getAllPrograms, null)
+        if(programs.moveToFirst()){
+            do {
+                println("${programs.getInt(0)} ${programs.getString(1)} ${programs.getInt(2)} ${programs.getInt(3)} ${programs.getInt(4)}")
+                item = mapOf("idProgram" to programs.getInt(0), "nameProgram" to programs.getString(1), "numSemester" to programs.getInt(2),
+                    "numCredits" to programs.getInt(3), "nameFaculty" to findNameFacultyById(programs.getInt(5)))
+                items.add(item)
+            }while (programs.moveToNext())
+        }else{
+            println("La tabla esta vacía")
+        }
+        return items;
     }
 }

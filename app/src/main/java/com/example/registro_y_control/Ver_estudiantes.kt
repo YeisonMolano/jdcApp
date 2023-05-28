@@ -16,4 +16,10 @@ class Ver_estudiantes : AppCompatActivity() {
             startActivity(/* intent = */ it)
         }
     }
+
+    fun viewActives(view: View){
+        val intent: Intent = Intent(this, View_estudiantes_activos::class.java).also {
+            startActivity(/* intent = */ it)
+        }
+    }
 }

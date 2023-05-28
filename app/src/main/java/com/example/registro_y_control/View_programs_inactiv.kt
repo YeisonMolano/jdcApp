@@ -1,5 +1,6 @@
 package com.example.registro_y_control
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,15 +10,16 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.registro_y_control.db.OpenHelperDatabase
 
-class View_programas_activos : AppCompatActivity() {
+class View_programs_inactiv : AppCompatActivity() {
     lateinit var tablePrograms : TableLayout
     lateinit var db: OpenHelperDatabase
     var items = mutableListOf<Map<*, *>>()
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.view_programas_activos)
+        setContentView(R.layout.view_programs_inactiv)
         db = OpenHelperDatabase(this)
-        items = db.getAllProgramasByStatus("ACTIVE") as MutableList<Map<*, *>>;
+        items = db.getAllProgramasByStatus("INACTIVE") as MutableList<Map<*, *>>;
 
         tablePrograms = findViewById(R.id.tb_programs_active)
         items.forEach{student ->

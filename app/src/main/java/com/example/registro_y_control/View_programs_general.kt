@@ -22,4 +22,10 @@ class View_programs_general : AppCompatActivity() {
             startActivity(/* intent = */ it)
         }
     }
+
+    fun viewProgramsInactive(view: View){
+        val intent: Intent = Intent(this, View_programs_inactiv::class.java).also {
+            startActivity(/* intent = */ it)
+        }
+    }
 }
