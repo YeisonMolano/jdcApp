@@ -17,6 +17,7 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
     private val TABLE_INSCRIPTION = "INSCRIPTION";
     private val TABLE_STUDENT = "STUDENT";
     private val TABLE_CURRENT_SEMESTER = "CURRENT_SEMESTER"
+    private val TABLE_INSCRIPTION_TEACHER = "INSCRIPTION_TEACHER"
 
     override fun onCreate(db: SQLiteDatabase?) {
         var createTableRole = "CREATE TABLE " + TABLE_ROLE + "(" +
@@ -55,16 +56,6 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
                 "  semesterLocation INTEGER," +
                 "  numCredits INTEGER" +
                 ");"
-        val createTableTeacher = "CREATE TABLE " + TABLE_TEACHER + " (" +
-                "  idTeacher INTEGER PRIMARY KEY," +
-                "  tittle VARCHAR(60)," +
-                "  experience INTEGER," +
-                "  status VARCHAR(30)," +
-                "  numDocument integer," +
-                "  idProgram INTEGER," +
-                "  FOREIGN KEY (idProgram) REFERENCES $TABLE_PROGRAM (idProgram)" +
-                "  FOREIGN KEY (numDocument) REFERENCES $TABLE_USER (numDocument)" +
-                ");"
         val createTableAssignedSubjects = "CREATE TABLE " + TABLE_ASSIGNED_SUBJECTS + " (" +
                 "  idAssignedSubjects INTEGER PRIMARY KEY," +
                 "  idTeacher INTEGER," +
@@ -83,6 +74,33 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
                 "  idProgram INTEGER," +
                 "  FOREIGN KEY (numDocument) REFERENCES $TABLE_USER (numDocument)," +
                 "  FOREIGN KEY (idProgram) REFERENCES $TABLE_PROGRAM (idProgram)" +
+                ");"
+        val createTableInscriptionTeacher = "CREATE TABLE " + TABLE_INSCRIPTION_TEACHER + " (" +
+                "  idInscriptionTeacher INTEGER PRIMARY KEY," +
+                "  typeDocument VARCHAR(30)," +
+                "  gender VARCHAR(30)," +
+                "  birdthdate VARCHAR(30)," +
+                "  numDocument INTEGER," +
+                "  phone VARCHAR(10)," +
+                "  experience VARCHAR(10)," +
+                "  tittle VARCHAR(30)," +
+                "  idProgram INTEGER," +
+                "  FOREIGN KEY (numDocument) REFERENCES $TABLE_USER (numDocument)," +
+                "  FOREIGN KEY (idProgram) REFERENCES $TABLE_PROGRAM (idProgram)" +
+                ");"
+        val createTableTeacher = "CREATE TABLE " + TABLE_TEACHER + " (" +
+                "  idTeacher INTEGER PRIMARY KEY," +
+                "  typeDocument VARCHAR(30)," +
+                "  gender VARCHAR(30)," +
+                "  birdthdate VARCHAR(30)," +
+                "  tittle VARCHAR(60)," +
+                "  experience INTEGER," +
+                "  phone VARCHAR(10)," +
+                "  status VARCHAR(30)," +
+                "  numDocument integer," +
+                "  idProgram INTEGER," +
+                "  FOREIGN KEY (idProgram) REFERENCES $TABLE_PROGRAM (idProgram)" +
+                "  FOREIGN KEY (numDocument) REFERENCES $TABLE_USER (numDocument)" +
                 ");"
         val createTableStudent = "CREATE TABLE " + TABLE_STUDENT + " (" +
                 "  idStudent INTEGER PRIMARY KEY," +
@@ -118,6 +136,7 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
             db.execSQL(createTableInscription)
             db.execSQL(createTableStudent)
             db.execSQL(createTableCurrentSemester)
+            db.execSQL(createTableInscriptionTeacher)
         }
 
         var insertFirst = "INSERT INTO $TABLE_AUTHORITIES values (1049658454, 'Yeison', 'Molano', 1);"
@@ -305,11 +324,20 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
         }
     }
 
-    fun createTeacher(tittle: String, experience: Int, program: String, numDocument: Int){
-        val createTeacher = "INSERT INTO $TABLE_TEACHER (tittle, experience, idProgram, status, numDocument)" +
-                "VALUES ('$tittle', $experience, ${findIdProgramByName(program)}, 'PENDING', $numDocument);"
-        val db = this.writableDatabase
-        db.execSQL(createTeacher)
+    fun createTeacher(idTeacher: Int, typeDocument: String, gender: String, birthdate: String, tittle: String,
+                      experience: Int, phone: String, numDocument: Int, program: Int): Boolean{
+        try {
+            val createTeacher = "INSERT INTO $TABLE_TEACHER (idTeacher, typeDocument, gender, birdthdate, tittle, " +
+                    "experience, phone, status, numDocument, idProgram)" +
+                    "VALUES ($idTeacher, '$typeDocument', '$gender', '$birthdate', '$tittle', $experience, " +
+                    "'$phone', 'ACTIVE', $numDocument, $program);"
+            println(createTeacher)
+            val db = this.writableDatabase
+            db.execSQL(createTeacher)
+            return true;
+        }catch (e: Exception){
+            return false;
+        }
     }
 
     fun createAssignedSubjects(idTeacher: Int, idCourse: Int){
@@ -317,6 +345,15 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
                 "VALUES ($idTeacher, $idCourse);"
         val db = this.writableDatabase
         db.execSQL(assignedSubject)
+    }
+
+    fun createTeacherInscription(idInscriptionTeacher: Int, gender: String, birdthdate: String, numDocument: Int, phone: String,
+    experience: Int, tittle: String, idProgram: String){
+        println("soy el id $idInscriptionTeacher")
+        val createInscription = "INSERT INTO $TABLE_INSCRIPTION_TEACHER (idInscriptionTeacher, typeDocument, gender, birdthdate, numDocument, idProgram, phone, experience, tittle)" +
+                "VALUES ($idInscriptionTeacher, 'C.C.', '$gender', '$birdthdate', $numDocument, ${findIdProgramByName(idProgram)}, '$phone', $experience, '$tittle');"
+    val db = this.writableDatabase
+    db.execSQL(createInscription)
     }
 
     fun createInscription(idInscription: Int, typeDocument: String, gender: String, birdthdate: String, numDocument: Int, idProgram: String, phone: String){
@@ -360,27 +397,21 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
         }
     }
 
-    fun getAllStudentsPending(): List<Map<*, *>> {
-        var getAllPrograms = "SElECT * FROM $TABLE_INSCRIPTION;"
-        val db = this.readableDatabase
-        val items = mutableListOf<Map<*, *>>()
-        var programs = db.rawQuery(getAllPrograms, null)
-        if(programs.moveToFirst()){
-            do {
-                items.add(findUserById(programs.getInt(5), 2))
-            }while (programs.moveToNext())
-        }else{
-            println("La tabla esta vacía ñero")
+    fun findUserInsrciption(numDocument: Int, type: String): Map<*, *>{
+        var findUserInsricption = ""
+        if(type.equals("STUDENT")){
+            findUserInsricption = "SELECT $TABLE_USER.name, $TABLE_USER.lastName, $TABLE_USER.email," +
+                    "$TABLE_INSCRIPTION.typeDocument, $TABLE_INSCRIPTION.gender, $TABLE_INSCRIPTION.birdthdate," +
+                    "$TABLE_INSCRIPTION.phone, $TABLE_INSCRIPTION.idProgram FROM $TABLE_USER JOIN $TABLE_INSCRIPTION " +
+                    "ON $TABLE_USER.numDocument = $TABLE_INSCRIPTION.numDocument WHERE $TABLE_INSCRIPTION.numDocument = " +
+                    "$numDocument"
+        }else if(type.equals("TEACHER")){
+            findUserInsricption = "SELECT $TABLE_USER.name, $TABLE_USER.lastName, $TABLE_USER.email," +
+                    "$TABLE_INSCRIPTION_TEACHER.typeDocument, $TABLE_INSCRIPTION_TEACHER.gender, $TABLE_INSCRIPTION_TEACHER.birdthdate," +
+                    "$TABLE_INSCRIPTION_TEACHER.phone, $TABLE_INSCRIPTION_TEACHER.idProgram FROM $TABLE_USER JOIN $TABLE_INSCRIPTION_TEACHER " +
+                    "ON $TABLE_USER.numDocument = $TABLE_INSCRIPTION_TEACHER.numDocument WHERE $TABLE_INSCRIPTION_TEACHER.numDocument = " +
+                    "$numDocument"
         }
-        return items;
-    }
-
-    fun findUserInsrciption(numDocument: Int): Map<*, *>{
-        var findUserInsricption = "SELECT $TABLE_USER.name, $TABLE_USER.lastName, $TABLE_USER.email," +
-                "$TABLE_INSCRIPTION.typeDocument, $TABLE_INSCRIPTION.gender, $TABLE_INSCRIPTION.birdthdate," +
-                "$TABLE_INSCRIPTION.phone, $TABLE_INSCRIPTION.idProgram FROM $TABLE_USER JOIN $TABLE_INSCRIPTION " +
-                "ON $TABLE_USER.numDocument = $TABLE_INSCRIPTION.numDocument WHERE $TABLE_INSCRIPTION.numDocument = " +
-                "$numDocument"
         val db = this.readableDatabase
         var userFind = db.rawQuery(findUserInsricption, null)
         var inscription = if(userFind.moveToFirst()){
@@ -405,19 +436,50 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
         }
     }
 
+    //Metodos drop
+    fun dropInsriptionTeacher(numDocument: Int){
+        var dropTupla = "DELETE FROM $TABLE_INSCRIPTION_TEACHER WHERE numDocument = $numDocument"
+        val db = this.writableDatabase
+        db.execSQL(dropTupla)
+    }
+
     fun dropInsription(numDocument: Int){
         var dropTupla = "DELETE FROM $TABLE_INSCRIPTION WHERE numDocument = $numDocument"
         val db = this.writableDatabase
         db.execSQL(dropTupla)
     }
 
-    fun updateRolToStudent(numDocument: Int){
-        println("Aca")
-        var changeRole = "UPDATE $TABLE_AUTHORITIES SET idRole = 3 WHERE idAuthority = $numDocument;"
+    fun updateRolTo(numDocument: Int, type: String){
+        var changeRole = ""
+        if(type.equals("STUDENT")){
+            changeRole = "UPDATE $TABLE_AUTHORITIES SET idRole = 3 WHERE idAuthority = $numDocument;"
+        }else if(type.equals("TEACHER")){
+            changeRole = "UPDATE $TABLE_AUTHORITIES SET idRole = 4 WHERE idAuthority = $numDocument;"
+        }
         val db = this.writableDatabase
         db.execSQL(changeRole)
-        findInscription(numDocument)
-        dropInsription(numDocument)
+        if(type.equals("STUDENT")){
+            findInscription(numDocument)
+            dropInsription(numDocument)
+        }else if(type.equals("TEACHER")){
+            findInscriptionTeacher(numDocument)
+            dropInsriptionTeacher(numDocument)
+        }
+    }
+
+    fun findInscriptionTeacher(numDocument: Int): Boolean{
+        var findInscription = "SELECT * FROM $TABLE_INSCRIPTION_TEACHER WHERE idInscriptionTeacher = $numDocument"
+        println(findInscription)
+        val db = this.readableDatabase
+        var inscription = db.rawQuery(findInscription, null)
+        if(inscription.moveToFirst()){
+            println("llego")
+            return createTeacher(inscription.getInt(0), inscription.getString(1),inscription.getString(2),
+                inscription.getString(3),inscription.getString(7),inscription.getInt(6), inscription.getString(5),
+                inscription.getInt(0), inscription.getInt(8))
+        }else{
+            return false;
+        }
     }
 
     fun findInscription(numDocument: Int): Boolean{
@@ -425,7 +487,6 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
         val db = this.readableDatabase
         var faculty = db.rawQuery(findInscription, null)
         if(faculty.moveToFirst()){
-            println("La creacion")
             return createStudent(faculty.getInt(0), 1, "ACTIVE", faculty.getInt(0), faculty.getInt(7),
                 faculty.getString(2), faculty.getString(3), faculty.getString(4), faculty.getString(6))
         }else{
@@ -458,27 +519,6 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
         }else{
             return "Este id no existe en la base de datos"
         }
-    }
-
-    fun getStudentsActive(): List<Map<*, *>>{
-        var getStudentsActive = "SElECT * FROM $TABLE_STUDENT WHERE statusStudent = 'ACTIVE';"
-        val db = this.readableDatabase
-        val items = mutableListOf<Map<*, *>>()
-        var item : Map<*, *>
-        var students = db.rawQuery(getStudentsActive, null)
-        if(students.moveToFirst()){
-            do {
-                item = mapOf("idStudent" to students.getInt(0), "semester" to 1, "statusStudent" to "ACTIVE",
-                    "numDocument" to students.getInt(0), "idProgram" to students.getInt(7),
-                    "typeDocument" to students.getString(2), "gender" to students.getString(3),
-                    "birthdate" to students.getString(4), "phone" to students.getString(6), "name" to findUserById(students.getInt(0), 1)["name"] )
-                println(item)
-                items.add(item)
-            }while (students.moveToNext())
-        }else{
-            println("La tabla esta vacía")
-        }
-        return items;
     }
 
 
@@ -525,14 +565,7 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
     }
 
     fun getAllProgramasByStatus(status: String): List<Map<*, *>>{
-        var getAllPrograms = ""
-        if(status.equals("ACTIVE")){
-            getAllPrograms = "SElECT * FROM $TABLE_PROGRAM WHERE statusProgram = 'ACTIVE';"
-        }else if(status.equals("INACTIVE")){
-            getAllPrograms = "SElECT * FROM $TABLE_PROGRAM WHERE statusProgram = 'INACTIVE';"
-        }else{
-            return emptyList();
-        }
+        var getAllPrograms = "SElECT * FROM $TABLE_PROGRAM WHERE statusProgram = '$status';"
         val db = this.readableDatabase
         val items = mutableListOf<Map<*, *>>()
         var item : Map<*, *>
@@ -546,6 +579,80 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
             }while (programs.moveToNext())
         }else{
             println("La tabla esta vacía")
+        }
+        return items;
+    }
+
+    fun getAllStudentsByStatus(status: String): List<Map<*, *>>{
+        var getStudentsActive = "SElECT * FROM $TABLE_STUDENT WHERE statusStudent = '$status';"
+        val db = this.readableDatabase
+        val items = mutableListOf<Map<*, *>>()
+        var item : Map<*, *>
+        var students = db.rawQuery(getStudentsActive, null)
+        if(students.moveToFirst()){
+            do {
+                item = mapOf("idStudent" to students.getInt(0), "semester" to 1, "statusStudent" to "ACTIVE",
+                    "numDocument" to students.getInt(0), "idProgram" to students.getInt(7),
+                    "typeDocument" to students.getString(2), "gender" to students.getString(3),
+                    "birthdate" to students.getString(4), "phone" to students.getString(6), "name" to findUserById(students.getInt(0), 1)["name"] )
+                println(item)
+                items.add(item)
+            }while (students.moveToNext())
+        }else{
+            println("La tabla esta vacía")
+        }
+        return items;
+    }
+
+    fun getAllStudentsPending(): List<Map<*, *>> {
+        var getAllPrograms = "SElECT * FROM $TABLE_INSCRIPTION;"
+        val db = this.readableDatabase
+        val items = mutableListOf<Map<*, *>>()
+        var programs = db.rawQuery(getAllPrograms, null)
+        if(programs.moveToFirst()){
+            do {
+                items.add(findUserById(programs.getInt(5), 2))
+            }while (programs.moveToNext())
+        }else{
+            println("La tabla esta vacía ñero")
+        }
+        return items;
+    }
+
+    fun getAllDocentsPending(): List<Map<*, *>> {
+        var getAllTeachers = "SElECT * FROM $TABLE_INSCRIPTION_TEACHER;"
+        val db = this.readableDatabase
+        val items = mutableListOf<Map<*, *>>()
+        var teachers = db.rawQuery(getAllTeachers, null)
+        if(teachers.moveToFirst()){
+            do {
+                println()
+                items.add(findUserById(teachers.getInt(4), 2))
+            }while (teachers.moveToNext())
+        }else{
+            println("La tabla esta vacía ñero")
+        }
+        return items;
+    }
+
+    fun getAllTeachersByStatus(status: String): MutableList<Map<*, *>> {
+        var getTeachersActive = "SElECT * FROM $TABLE_TEACHER WHERE status = '$status';"
+        val db = this.readableDatabase
+        val items = mutableListOf<Map<*, *>>()
+        var item : Map<*, *>
+        var teacher = db.rawQuery(getTeachersActive, null)
+        if(teacher.moveToFirst()){
+            do {
+                println("${teacher.getInt(0)} ${teacher.getString(1)} ${teacher.getString(2)} ${teacher.getString(3)} ${teacher.getString(7)} ${teacher.getInt(6)} ${teacher.getString(5)} ${teacher.getInt(0)} ${teacher.getInt(8)}")
+                item = mapOf("idTeacher" to teacher.getInt(0), "typeDocument" to teacher.getString(1), "gender" to teacher.getString(2),
+                    "birdthdate" to teacher.getString(3), "tittle" to teacher.getString(7),
+                    "experience" to teacher.getInt(6), "phone" to teacher.getString(5),
+                    "status" to teacher.getInt(0), "numDocument" to teacher.getInt(8), "idProgram" to findUserById(teacher.getInt(0), 1)["name"] )
+                println(item)
+                items.add(item)
+            }while (teacher.moveToNext())
+        }else{
+            println("La tabla esta vacía aca")
         }
         return items;
     }

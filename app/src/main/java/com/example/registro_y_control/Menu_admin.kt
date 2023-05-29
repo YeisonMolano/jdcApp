@@ -24,6 +24,14 @@ class Menu_admin : AppCompatActivity() {
     }
 
     fun view_docentes_general(view: View){
+        val intent: Intent = Intent(this, View_docentes_general::class.java).also {
+            startActivity(/* intent = */ it)
+        }
+    }
 
+    fun view_materias_general(view: View){
+        val intent: Intent = Intent(this, View_materias_general::class.java).also {
+            startActivity(/* intent = */ it)
+        }
     }
 }

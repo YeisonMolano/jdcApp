@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/fondo_deg"
-    tools:context=".Ver_estudiantes">
+    tools:context=".Seleccionar_docente">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView6"
         android:layout_width="414dp"
         android:layout_height="57dp"
-        android:layout_marginTop="88dp"
-        android:text="Menu estudiantes"
+        android:layout_marginTop="140dp"
+        android:text="Seleccione un docente"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="34sp"
@@ -21,24 +21,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/estudiantes_pendientes"
-        android:layout_width="313dp"
-        android:layout_height="60dp"
-        android:backgroundTint="#D3C972"
-        android:ems="10"
-        android:onClick="viewStudents"
-        android:padding="18dp"
-        android:text="Estudiantes pendientes"
-        android:textColor="#FFFFFF"
-        android:textSize="11sp"
-        app:cornerRadius="25dp"
-        app:iconTint="#000000"
+    <Spinner
+        android:id="@+id/spinner_docents"
+        android:layout_width="357dp"
+        android:layout_height="43dp"
+        android:background="#8A7DA3CD"
+        android:backgroundTint="#FFFFFF"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.262" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/docents_active"
@@ -46,9 +39,9 @@
         android:layout_height="60dp"
         android:backgroundTint="#D3C972"
         android:ems="10"
-        android:onClick="viewActives"
+        android:onClick="showUser"
         android:padding="18dp"
-        android:text="Estudiantes activos"
+        android:text="Ver docente"
         android:textColor="#FFFFFF"
         android:textSize="11sp"
         app:cornerRadius="25dp"
@@ -57,25 +50,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.512" />
-
-    <Button
-        android:id="@+id/students_active2"
-        android:layout_width="313dp"
-        android:layout_height="60dp"
-        android:backgroundTint="#D3C972"
-        android:ems="10"
-        android:onClick="viewInactives"
-        android:padding="18dp"
-        android:text="Estudiantes inactivos"
-        android:textColor="#FFFFFF"
-        android:textSize="11sp"
-        app:cornerRadius="25dp"
-        app:iconTint="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.758" />
+        app:layout_constraintVertical_bias="0.865" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

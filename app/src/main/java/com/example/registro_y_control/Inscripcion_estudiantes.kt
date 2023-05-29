@@ -25,8 +25,8 @@ class Inscripcion_estudiantes : AppCompatActivity() {
         editor = sharedPreferences.edit()
         db = OpenHelperDatabase(this)
 
-        findViewById<EditText>(R.id.nameStudentFalse).setText(sharedPreferences.getString("name", "name"))
-        findViewById<EditText>(R.id.lastNameStudentFalse).setText(sharedPreferences.getString("lastName", "lastName"))
+        findViewById<EditText>(R.id.nameTeacherFalse).setText(sharedPreferences.getString("name", "name"))
+        findViewById<EditText>(R.id.lastNameTeacherFalse).setText(sharedPreferences.getString("lastName", "lastName"))
 
         val items = mutableListOf("Seleccione un programa")
         val programs = db.getAllProgramas()

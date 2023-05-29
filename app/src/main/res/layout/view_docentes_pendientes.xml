@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/fondo_deg"
-    tools:context=".Estudiantes_pendientes">
+    tools:context=".View_docentes_pendientes">
 
     <ImageView
         android:id="@+id/imageView5"
@@ -60,7 +60,7 @@
         android:layout_width="414dp"
         android:layout_height="57dp"
         android:layout_marginTop="88dp"
-        android:text="Estudiantes pendientes"
+        android:text="Docentes pendientes"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="34sp"
@@ -91,7 +91,7 @@
         android:ems="10"
         android:onClick="showUser"
         android:padding="18dp"
-        android:text="Ver estudiante"
+        android:text="Ver docente"
         android:textColor="#FFFFFF"
         android:textSize="11sp"
         app:cornerRadius="25dp"
@@ -148,7 +148,7 @@
         android:layout_height="68dp"
         android:backgroundTint="#D3C972"
         android:ems="10"
-        android:onClick="acceptStudent"
+        android:onClick="acceptDocent"
         android:padding="18dp"
         android:text="Aceptar"
         android:textColor="#FFFFFF"
@@ -293,6 +293,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.617" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

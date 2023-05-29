@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/fondo_deg">
@@ -36,9 +37,9 @@
         app:layout_constraintVertical_bias="0.046" />
 
     <EditText
-        android:id="@+id/nameStudentFalse"
-        android:layout_width="325dp"
-        android:layout_height="35dp"
+        android:id="@+id/tittleCreateTeacher"
+        android:layout_width="347dp"
+        android:layout_height="37dp"
         android:layout_margin="10dp"
         android:background="#8A7DA3CD"
         android:backgroundTint="#FFFFFF"
@@ -51,15 +52,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.383"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.159" />
+        app:layout_constraintVertical_bias="0.168" />
 
     <EditText
-        android:id="@+id/experience"
-        android:layout_width="325dp"
-        android:layout_height="35dp"
+        android:id="@+id/experienceCreateTeacher"
+        android:layout_width="347dp"
+        android:layout_height="37dp"
         android:layout_margin="10dp"
         android:background="#8A7DA3CD"
         android:backgroundTint="#FFFFFF"
@@ -72,25 +73,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.383"
+        app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.239" />
-
-    <Spinner
-        android:id="@+id/spinnerPrograma"
-        android:layout_width="325dp"
-        android:layout_height="35dp"
-        android:layout_margin="10dp"
-        android:background="#8A7DA3CD"
-        android:backgroundTint="#FFFFFF"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.383"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.346" />
+        app:layout_constraintVertical_bias="0.243" />
 
     <TextView
         android:id="@+id/textViewProg"
@@ -138,5 +124,134 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.85" />
+
+    <EditText
+        android:id="@+id/nameTeacherFalse"
+        android:layout_width="150dp"
+        android:layout_height="34dp"
+        android:layout_margin="10dp"
+        android:background="#8A7DA3CD"
+        android:backgroundTint="#FFFFFF"
+        android:ems="15"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColorHint="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.206"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.091" />
+
+    <EditText
+        android:id="@+id/birthday"
+        android:layout_width="186dp"
+        android:layout_height="44dp"
+        android:layout_margin="10dp"
+        android:background="#8A7DA3CD"
+        android:backgroundTint="#FFFFFF"
+        android:clickable="true"
+        android:contextClickable="true"
+        android:ems="15"
+        android:hint="Fecha de nacimiento"
+        android:inputType="phone"
+        android:linksClickable="true"
+        android:padding="10dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.693"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.426" />
+
+    <EditText
+        android:id="@+id/lastNameTeacherFalse"
+        android:layout_width="165dp"
+        android:layout_height="33dp"
+        android:layout_margin="10dp"
+        android:background="#8A7DA3CD"
+        android:backgroundTint="#FFFFFF"
+        android:ems="15"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColorHint="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.817"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.091" />
+
+    <Spinner
+        android:id="@+id/spinnerPrograma"
+        android:layout_width="325dp"
+        android:layout_height="35dp"
+        android:layout_margin="10dp"
+        android:background="#8A7DA3CD"
+        android:backgroundTint="#FFFFFF"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.395"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.343" />
+
+    <Spinner
+        android:id="@+id/spinner_genderStudent"
+        android:layout_width="325dp"
+        android:layout_height="35dp"
+        android:layout_margin="10dp"
+        android:background="#8A7DA3CD"
+        android:backgroundTint="#FFFFFF"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.505" />
+
+    <EditText
+        android:id="@+id/phoneInscriptionStudent"
+        android:layout_width="325dp"
+        android:layout_height="35dp"
+        android:layout_margin="10dp"
+        android:background="#8A7DA3CD"
+        android:backgroundTint="#FFFFFF"
+        android:ems="15"
+        android:hint="Telefono"
+        android:inputType="phone"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.679" />
+
+    <Button
+        android:id="@+id/button_birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#7BBF65"
+        android:onClick="mostrarDatePickerDialog"
+        android:text="Seleccionar"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        app:cornerRadius="35dp"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.236"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.428" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -64,25 +64,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.719" />
 
-    <Button
-        android:id="@+id/verDocentes4"
-        android:layout_width="313dp"
-        android:layout_height="60dp"
-        android:backgroundTint="#D3C972"
-        android:ems="10"
-        android:onClick="ingresar"
-        android:padding="18dp"
-        android:text="Docentes"
-        android:textColor="#FFFFFF"
-        android:textSize="11sp"
-        app:cornerRadius="25dp"
-        app:iconTint="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.913" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="414dp"

@@ -10,16 +10,17 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.registro_y_control.db.OpenHelperDatabase
 
-class View_estudiantes_activos : AppCompatActivity() {
+class View_docentes : AppCompatActivity() {
     lateinit var tableStudents : TableLayout
     lateinit var db: OpenHelperDatabase
     var items = mutableListOf<Map<*, *>>()
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.view_estudiantes_activos)
+        setContentView(R.layout.view_docentes)
+
         db = OpenHelperDatabase(this)
-        items = db.getAllStudentsByStatus("ACTIVE") as MutableList<Map<*, *>>;
+        items = db.getAllTeachersByStatus("ACTIVE") as MutableList<Map<*, *>>;
 
         tableStudents = findViewById(R.id.tb_programs_active)
         items.forEach{student ->
@@ -35,6 +36,7 @@ class View_estudiantes_activos : AppCompatActivity() {
             delete.id = student["idStudent"].toString().toInt()
             tableStudents.addView(registro)
         }
+
     }
 
     fun edit(view: View){
