@@ -1,6 +1,8 @@
 package com.example.registro_y_control
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,14 +14,16 @@ import com.example.registro_y_control.db.OpenHelperDatabase
 class View_materias_activas : AppCompatActivity() {
     lateinit var tablePrograms : TableLayout
     lateinit var db: OpenHelperDatabase
+    lateinit var sharedPreferences: SharedPreferences
     var items = mutableListOf<Map<*, *>>()
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.view_materias_activas)
+        sharedPreferences = getSharedPreferences("datos_globales", Context.MODE_PRIVATE)
 
         db = OpenHelperDatabase(this)
-        items = db.getAllProgramasByStatus("ACTIVE") as MutableList<Map<*, *>>;
+        items = db.getAllMateriasByStudent(sharedPreferences.getInt("numDocument", 0),"ACTIVE") as MutableList<Map<*, *>>;
 
         tablePrograms = findViewById(R.id.tb_programs_active)
         items.forEach{student ->

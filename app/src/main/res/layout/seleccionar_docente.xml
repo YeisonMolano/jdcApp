@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/fondo_deg"
+    android:onClick="assign"
     tools:context=".Seleccionar_docente">
 
     <TextView
@@ -22,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner_docents"
+        android:id="@+id/spinner_seleccionar_docente"
         android:layout_width="357dp"
         android:layout_height="43dp"
         android:background="#8A7DA3CD"
@@ -34,14 +35,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/docents_active"
+        android:id="@+id/assign_materia"
         android:layout_width="313dp"
         android:layout_height="60dp"
         android:backgroundTint="#D3C972"
         android:ems="10"
-        android:onClick="showUser"
+        android:onClick="assign"
         android:padding="18dp"
-        android:text="Ver docente"
+        android:text="Asignar materias"
         android:textColor="#FFFFFF"
         android:textSize="11sp"
         app:cornerRadius="25dp"

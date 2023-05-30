@@ -18,7 +18,7 @@ class View_docentes_general : AppCompatActivity() {
     }
 
     fun assignMaterias(view: View){
-        val intent: Intent = Intent(this, MainActivity::class.java).also {
+        val intent: Intent = Intent(this, Seleccionar_docente::class.java).also {
             startActivity(/* intent = */ it)
         }
     }

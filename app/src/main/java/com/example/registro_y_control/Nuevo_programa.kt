@@ -44,6 +44,7 @@ class Nuevo_programa : AppCompatActivity() {
         this.findViewById<EditText>(R.id.numCreditsCreate).text.toString().toInt(),
                 db.findIdFacultyByName(findViewById<Spinner>(R.id.spinnerFacultades).selectedItem.toString()))){
             editor.putInt("idProgramNew", db.findIdProgramByName(this.findViewById<EditText>(R.id.nameProgramCreate).text.toString()))
+            editor.apply()
             val intent: Intent = Intent(this, Nuevo_curso::class.java).also {
                 startActivity(/* intent = */ it)
             }

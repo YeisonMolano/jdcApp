@@ -30,10 +30,9 @@ class View_docentes : AppCompatActivity() {
             val edit = registro.findViewById<View>(R.id.butonEditar)
             val delete = registro.findViewById<View>(R.id.butonDlelete)
             columnName.text = student["name"].toString()
-            columnFacultad.text = student["name"].toString()
-            println(student["idStudent"])
-            edit.id = student["idStudent"].toString().toInt()
-            delete.id = student["idStudent"].toString().toInt()
+            columnFacultad.text = student["program"].toString()
+            edit.id = student["idTeacher"].toString().toInt()
+            delete.id = student["idTeacher"].toString().toInt()
             tableStudents.addView(registro)
         }
 

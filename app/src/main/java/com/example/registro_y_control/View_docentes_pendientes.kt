@@ -60,7 +60,7 @@ class View_docentes_pendientes : AppCompatActivity() {
                 findViewById<Spinner>(R.id.spinner_studenst_pending).selectedItem.toString()
                     .split(" ")[0].toInt(), "TEACHER"
             )
-            findViewById<Button>(R.id.docents_active).visibility = View.GONE
+            findViewById<Button>(R.id.assign_materia).visibility = View.GONE
 
             this.findViewById<ImageView>(R.id.imageView5).visibility = View.VISIBLE
 
@@ -124,7 +124,7 @@ class View_docentes_pendientes : AppCompatActivity() {
         this.findViewById<TextView>(R.id.identificationStudentPending).visibility = View.GONE
         this.findViewById<TextView>(R.id.programStudentPending).visibility = View.GONE
         this.findViewById<ImageView>(R.id.imageView5).visibility = View.GONE
-        findViewById<Button>(R.id.docents_active).visibility = View.VISIBLE
+        findViewById<Button>(R.id.assign_materia).visibility = View.VISIBLE
     }
 
     fun acceptDocent(view: View){
@@ -148,7 +148,7 @@ class View_docentes_pendientes : AppCompatActivity() {
         this.findViewById<TextView>(R.id.identificationStudentPending).visibility = View.GONE
         this.findViewById<TextView>(R.id.programStudentPending).visibility = View.GONE
         this.findViewById<ImageView>(R.id.imageView5).visibility = View.GONE
-        findViewById<Button>(R.id.docents_active).visibility = View.VISIBLE
+        findViewById<Button>(R.id.assign_materia).visibility = View.VISIBLE
     }
 
     fun reject(view: View){

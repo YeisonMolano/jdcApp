@@ -55,7 +55,7 @@ class Estudiantes_pendientes : AppCompatActivity() {
         if(!findViewById<Spinner>(R.id.spinner_studenst_pending).selectedItem.toString().equals("Ver estudiantes pendientes")){
             println(findViewById<Spinner>(R.id.spinner_studenst_pending).selectedItem)
             var student =  db.findUserInsrciption(findViewById<Spinner>(R.id.spinner_studenst_pending).selectedItem.toString().split(" ")[0].toInt(), "STUDENT")
-            findViewById<Button>(R.id.docents_active).visibility = View.GONE
+            findViewById<Button>(R.id.assign_materia).visibility = View.GONE
 
             this.findViewById<ImageView>(R.id.imageView5).visibility = View.VISIBLE
 
@@ -110,31 +110,36 @@ class Estudiantes_pendientes : AppCompatActivity() {
         this.findViewById<TextView>(R.id.identificationStudentPending).visibility = View.GONE
         this.findViewById<TextView>(R.id.programStudentPending).visibility = View.GONE
         this.findViewById<ImageView>(R.id.imageView5).visibility = View.GONE
-        findViewById<Button>(R.id.docents_active).visibility = View.VISIBLE
+        findViewById<Button>(R.id.assign_materia).visibility = View.VISIBLE
     }
 
     fun acceptStudent(view:View){
         db.updateRolTo(findViewById<Spinner>(R.id.spinner_studenst_pending).selectedItem.toString().split(" ")[0].toInt(), "STUDENT")
-        chargeList()
-        findViewById<TextView>(R.id.email_estudiante_pendiente).visibility = View.GONE
-        findViewById<TextView>(R.id.program_estudiante_pendiente).visibility = View.GONE
-        findViewById<TextView>(R.id.birthdate_estudiante_pendiente).visibility = View.GONE
-        findViewById<TextView>(R.id.gender_estudiante_pendiente).visibility = View.GONE
-        findViewById<TextView>(R.id.nombres_estudiante_pendiente).visibility = View.GONE
-        findViewById<TextView>(R.id.numIdentificacion_estudiante_pendiente).visibility = View.GONE
-        findViewById<TextView>(R.id.telefono_estudiante_pendiente).visibility = View.GONE
-        this.findViewById<Button>(R.id.find_other).visibility = View.GONE
-        this.findViewById<Button>(R.id.accept_teacher).visibility = View.GONE
-        this.findViewById<Button>(R.id.rejected_teacher).visibility = View.GONE
-        this.findViewById<TextView>(R.id.nameStudentPending).visibility = View.GONE
-        this.findViewById<TextView>(R.id.birdhtadeStudentPending).visibility = View.GONE
-        this.findViewById<TextView>(R.id.emailStudentPending).visibility = View.GONE
-        this.findViewById<TextView>(R.id.genderStudentPending).visibility = View.GONE
-        this.findViewById<TextView>(R.id.phoneStudentPending).visibility = View.GONE
-        this.findViewById<TextView>(R.id.identificationStudentPending).visibility = View.GONE
-        this.findViewById<TextView>(R.id.programStudentPending).visibility = View.GONE
-        this.findViewById<ImageView>(R.id.imageView5).visibility = View.GONE
-        findViewById<Button>(R.id.docents_active).visibility = View.VISIBLE
+        if(db.createFirstCurrentSemester(db.findIdProgramByName(findViewById<TextView>(R.id.programStudentPending).text.toString()),
+                findViewById<TextView>(R.id.identificationStudentPending).text.toString().toInt())){
+            chargeList()
+            findViewById<TextView>(R.id.email_estudiante_pendiente).visibility = View.GONE
+            findViewById<TextView>(R.id.program_estudiante_pendiente).visibility = View.GONE
+            findViewById<TextView>(R.id.birthdate_estudiante_pendiente).visibility = View.GONE
+            findViewById<TextView>(R.id.gender_estudiante_pendiente).visibility = View.GONE
+            findViewById<TextView>(R.id.nombres_estudiante_pendiente).visibility = View.GONE
+            findViewById<TextView>(R.id.numIdentificacion_estudiante_pendiente).visibility = View.GONE
+            findViewById<TextView>(R.id.telefono_estudiante_pendiente).visibility = View.GONE
+            this.findViewById<Button>(R.id.find_other).visibility = View.GONE
+            this.findViewById<Button>(R.id.accept_teacher).visibility = View.GONE
+            this.findViewById<Button>(R.id.rejected_teacher).visibility = View.GONE
+            this.findViewById<TextView>(R.id.nameStudentPending).visibility = View.GONE
+            this.findViewById<TextView>(R.id.birdhtadeStudentPending).visibility = View.GONE
+            this.findViewById<TextView>(R.id.emailStudentPending).visibility = View.GONE
+            this.findViewById<TextView>(R.id.genderStudentPending).visibility = View.GONE
+            this.findViewById<TextView>(R.id.phoneStudentPending).visibility = View.GONE
+            this.findViewById<TextView>(R.id.identificationStudentPending).visibility = View.GONE
+            this.findViewById<TextView>(R.id.programStudentPending).visibility = View.GONE
+            this.findViewById<ImageView>(R.id.imageView5).visibility = View.GONE
+            findViewById<Button>(R.id.assign_materia).visibility = View.VISIBLE
+        }else{
+            Toast.makeText(this, "Error en la base de datos", Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun reject(view: View){

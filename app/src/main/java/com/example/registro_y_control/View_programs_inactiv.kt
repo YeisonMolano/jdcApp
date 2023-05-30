@@ -23,7 +23,6 @@ class View_programs_inactiv : AppCompatActivity() {
 
         tablePrograms = findViewById(R.id.tb_programs_active)
         items.forEach{student ->
-            println(student)
             val registro = LayoutInflater.from(this).inflate(R.layout.tb_programs_active_row, null, false)
             val columnName = registro.findViewById<View>(R.id.column_name) as TextView
             val columnFacultad = registro.findViewById<View>(R.id.column_facultad) as TextView
