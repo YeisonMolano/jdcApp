@@ -100,7 +100,7 @@
         app:layout_constraintVertical_bias="0.766" />
 
     <EditText
-        android:id="@+id/numCreditsOfCourseCreate"
+        android:id="@+id/lastNameNewUser"
         android:layout_width="320dp"
         android:layout_height="45dp"
         android:background="#8094E4E4"

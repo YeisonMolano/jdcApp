@@ -39,17 +39,26 @@ class Nuevo_programa : AppCompatActivity() {
     }
 
     fun createNewProgram(view: View){
-        if(db.createProgram(this.findViewById<EditText>(R.id.nameProgramCreate).text.toString(),
-        this.findViewById<EditText>(R.id.numSemesterOfProgram).text.toString().toInt(),
-        this.findViewById<EditText>(R.id.numCreditsCreate).text.toString().toInt(),
-                db.findIdFacultyByName(findViewById<Spinner>(R.id.spinnerFacultades).selectedItem.toString()))){
-            editor.putInt("idProgramNew", db.findIdProgramByName(this.findViewById<EditText>(R.id.nameProgramCreate).text.toString()))
-            editor.apply()
-            val intent: Intent = Intent(this, Nuevo_curso::class.java).also {
-                startActivity(/* intent = */ it)
+        if(isValid()){
+            if(db.createProgram(this.findViewById<EditText>(R.id.nameProgramCreate).text.toString(),
+                    this.findViewById<EditText>(R.id.numSemesterOfProgram).text.toString().toInt(),
+                    this.findViewById<EditText>(R.id.numCreditsCreate).text.toString().toInt(),
+                    db.findIdFacultyByName(findViewById<Spinner>(R.id.spinnerFacultades).selectedItem.toString()))){
+                editor.putInt("idProgramNew", db.findIdProgramByName(this.findViewById<EditText>(R.id.nameProgramCreate).text.toString()))
+                editor.apply()
+                val intent: Intent = Intent(this, Nuevo_curso::class.java).also {
+                    startActivity(/* intent = */ it)
+                }
+            }else{
+                Toast.makeText(this, "Error en la base de datos", Toast.LENGTH_SHORT).show()
             }
         }else{
-            Toast.makeText(this, "Error en la base de datos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Por favor rellena todos los datos", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun isValid(): Boolean{
+        return !this.findViewById<EditText>(R.id.nameProgramCreate).text.toString().equals("") && !this.findViewById<EditText>(R.id.numCreditsCreate).text.toString().equals("")
+                && !this.findViewById<EditText>(R.id.numSemesterOfProgram).text.toString().equals("") && !this.findViewById<Spinner>(R.id.spinnerFacultades).selectedItem.toString().equals("Elija la facultad")
     }
 }

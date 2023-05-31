@@ -25,14 +25,23 @@ class Nuevo_curso : AppCompatActivity() {
     }
 
     fun createNewCourse(view: View){
-        if(db.createCourse(this.findViewById<EditText>(R.id.nameCourseCreate).text.toString(), this.findViewById<EditText>(R.id.locationSemesterCreate).text.toString().toInt(), this.findViewById<EditText>(R.id.numCreditsOfCourseCreate).text.toString().toInt(), sharedPreferences.getInt("idProgramNew", 0))){
-            Toast.makeText(this, "El curso se ha creado correctamente", Toast.LENGTH_SHORT).show()
-            builder.setTitle("¡Alerta!").setMessage("¿Desea crear un nuevo curso?").setCancelable(true).setPositiveButton("Si"){dialogInterface, it -> dialogInterface.cancel() }
-                .setNegativeButton("Terminar"){dialogInterface, it -> val intent: Intent = Intent(this, View_programs_general::class.java).also {
-                    startActivity(/* intent = */ it)
-                }}.show()
+        if(isValid()){
+            if(db.createCourse(this.findViewById<EditText>(R.id.nameCourseCreate).text.toString(), this.findViewById<EditText>(R.id.locationSemesterCreate).text.toString().toInt(), this.findViewById<EditText>(R.id.lastNameNewUser).text.toString().toInt(), sharedPreferences.getInt("idProgramNew", 0))){
+                Toast.makeText(this, "El curso se ha creado correctamente", Toast.LENGTH_SHORT).show()
+                builder.setTitle("¡Alerta!").setMessage("¿Desea crear un nuevo curso?").setCancelable(true).setPositiveButton("Si"){dialogInterface, it -> dialogInterface.cancel() }
+                    .setNegativeButton("Terminar"){dialogInterface, it -> val intent: Intent = Intent(this, View_programs_general::class.java).also {
+                        startActivity(/* intent = */ it)
+                    }}.show()
+            }else{
+                Toast.makeText(this, "Ha habido un error en la base de datos", Toast.LENGTH_SHORT).show()
+            }
         }else{
-            Toast.makeText(this, "Ha habido un error en la base de datos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Por favor rellena todos los datos", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun isValid(): Boolean{
+        return !this.findViewById<EditText>(R.id.nameCourseCreate).text.toString().equals("") && !this.findViewById<EditText>(R.id.locationSemesterCreate).text.toString().equals("")
+                && !this.findViewById<EditText>(R.id.lastNameNewUser).text.toString().equals("")
     }
 }

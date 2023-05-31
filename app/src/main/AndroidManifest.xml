@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Registro_y_control"
         tools:targetApi="31">
         <activity
+            android:name=".View_materias_docente"
+            android:exported="false" />
+        <activity
             android:name=".View_assign_materias"
             android:exported="false" />
         <activity
