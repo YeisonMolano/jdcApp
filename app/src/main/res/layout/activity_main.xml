@@ -80,22 +80,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.753" />
 
-    <TextView
-        android:id="@+id/textViewOlvCon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="changeCreate"
-        android:text="¿Olvido su contraseña?"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#000000"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.776"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.657" />
-
     <Button
         android:id="@+id/boton_crear_cuenta"
         android:layout_width="173dp"
