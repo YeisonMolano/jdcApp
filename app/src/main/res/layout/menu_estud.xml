@@ -25,47 +25,7 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.673" />
-
-    <Button
-        android:id="@+id/verDocentes"
-        android:layout_width="313dp"
-        android:layout_height="60dp"
-        android:backgroundTint="#D3C972"
-        android:ems="10"
-        android:onClick="view_horario_actual"
-        android:padding="18dp"
-        android:text="Horario"
-        android:textColor="#FFFFFF"
-        android:textSize="11sp"
-        app:cornerRadius="25dp"
-        app:iconTint="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.764" />
-
-    <Button
-        android:id="@+id/estudiantes_pendientes"
-        android:layout_width="313dp"
-        android:layout_height="60dp"
-        android:backgroundTint="#D3C972"
-        android:ems="10"
-        android:onClick="view_liquidacion"
-        android:padding="18dp"
-        android:text="Liquidacion"
-        android:textColor="#FFFFFF"
-        android:textSize="11sp"
-        app:cornerRadius="25dp"
-        app:iconTint="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.853" />
+        app:layout_constraintVertical_bias="0.733" />
 
     <ImageView
         android:id="@+id/logo5"
