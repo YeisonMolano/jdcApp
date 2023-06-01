@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.registro_y_control.db.OpenHelperDatabase
 
@@ -27,6 +28,13 @@ class MainActivity : AppCompatActivity() {
             val intent: Intent = Intent(this, Registro:: class.java)
             startActivity(intent)
         }
+
+        val btn1: TextView = findViewById(R.id.textViewAcercaJuan)
+        btn1.setOnClickListener{
+            val intent: Intent = Intent(this, Mapa:: class.java)
+            startActivity(intent)
+        }
+
     }
 
     fun login(view: View){

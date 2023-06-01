@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Registro_y_control"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key"/>
         <activity
             android:name=".View_materias_docente"
             android:exported="false" />
@@ -108,6 +111,9 @@
             android:exported="false" />
         <activity
             android:name=".SlashPrimario"
+            android:exported="false" />
+        <activity
+            android:name=".Mapa"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
