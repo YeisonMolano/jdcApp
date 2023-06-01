@@ -66,7 +66,7 @@
         app:layout_constraintVertical_bias="0.776" />
 
     <Button
-        android:id="@+id/assign_materia"
+        android:id="@+id/ver_estudiantes_activos"
         android:layout_width="313dp"
         android:layout_height="60dp"
         android:backgroundTint="#7BBF65"

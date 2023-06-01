@@ -284,6 +284,21 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
         return "El usuario no exite";
     }
 
+    fun findStudentById(numDocument: Int): Map<*, *>{
+        var findStudent = "SELECT * FROM $TABLE_STUDENT WHERE numDocument = $numDocument"
+        val db = this.readableDatabase
+        val user = db.rawQuery(findStudent, null)
+        val userFind = if(user.moveToNext()){
+            mapOf("idStudent" to user.getInt(0), "semester" to user.getInt(1),
+                "numDocument" to user.getInt(0), "idProgram" to user.getInt(7),
+                "typeDocument" to user.getString(2), "gender" to user.getString(3),
+                "birthdate" to user.getString(4), "phone" to user.getString(6), "name" to findUserById(user.getInt(0), 1)["name"], "lastName" to findUserById(user.getInt(0), 1)["lastName"])
+        }else{
+            emptyMap()
+        }
+        return userFind
+    }
+
     //Metodo que me permite hacer la busqueda de un usuario mediante el identificador
     //Pharams: {numero de identificación del usuario, posible rol al que pertenece}
     fun findUserById(numDocument: Int, idRole: Int): Map<*, *>{

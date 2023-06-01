@@ -94,7 +94,7 @@
         app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
 
     <Button
-        android:id="@+id/assign_materia"
+        android:id="@+id/ver_estudiantes_activos"
         android:layout_width="313dp"
         android:layout_height="60dp"
         android:backgroundTint="#D3C972"
