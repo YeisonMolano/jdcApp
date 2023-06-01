@@ -29,7 +29,7 @@
         android:drawableLeft="@drawable/icono_pers"
         android:drawablePadding="25dp"
         android:ems="15"
-        android:hint="Correo"
+        android:hint="Usuario"
         android:inputType="textPersonName"
         android:padding="15dp"
         android:textColorHint="#FFFFFF"
