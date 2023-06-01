@@ -1,20 +1,18 @@
 package com.example.registro_y_control
 
 import android.annotation.SuppressLint
-import android.content.Intent
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ScrollView
 import android.widget.TableLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.registro_y_control.db.OpenHelperDatabase
 
 class View_estudiantes_activos : AppCompatActivity() {
@@ -22,6 +20,8 @@ class View_estudiantes_activos : AppCompatActivity() {
     lateinit var db: OpenHelperDatabase
     var items = mutableListOf<Map<*, *>>()
     private lateinit var builder: AlertDialog.Builder
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +29,8 @@ class View_estudiantes_activos : AppCompatActivity() {
         db = OpenHelperDatabase(this)
         items = db.getAllStudentsByStatus("ACTIVE") as MutableList<Map<*, *>>;
         builder = AlertDialog.Builder(this)
+        sharedPreferences = getSharedPreferences("datos_globales", Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
 
         tableStudents = findViewById(R.id.tb_programs_active)
         items.forEach{student ->
@@ -66,11 +68,28 @@ class View_estudiantes_activos : AppCompatActivity() {
         this.findViewById<TextView>(R.id.textView29).visibility = View.GONE
     }
 
-    fun terminarEditar(){
+    fun terminarEditar(view: View){
+        //if(isValid()){
+            db.updateStudent(
+                sharedPreferences.getString("documentPerson", "none")!!.toInt(), this.findViewById<EditText>(R.id.semesterNew).text.toString(),
+                this.findViewById<EditText>(R.id.statusNew).text.toString(), this.findViewById<EditText>(R.id.type_document).text.toString(),
+                this.findViewById<EditText>(R.id.genderNew).text.toString(), this.findViewById<EditText>(R.id.birthdateNew).text.toString())
+            println()
+        //}
+        this.findViewById<EditText>(R.id.nameUserNew).text
+        this.findViewById<EditText>(R.id.lastNameUserNew).text
+        this.findViewById<EditText>(R.id.semesterNew).text
+        this.findViewById<EditText>(R.id.type_document).text
 
+        this.findViewById<EditText>(R.id.statusNew).text
+
+
+        println("${this.findViewById<EditText>(R.id.nameUserNew).text} ${this.findViewById<EditText>(R.id.lastNameUserNew).text} ${this.findViewById<EditText>(R.id.semesterNew).text} ${this.findViewById<EditText>(R.id.type_document).text} ${this.findViewById<EditText>(R.id.genderNew).text} ${this.findViewById<EditText>(R.id.birthdateNew).text} ${this.findViewById<EditText>(R.id.phoneNew).text}")
     }
 
     fun edit(view: View){
+        editor.putString("documentPerson", "${view.id}")
+        editor.apply()
         var persona = db.findStudentById(view.id)
 
         this.findViewById<EditText>(R.id.nameUserNew).setText(persona["name"].toString())
@@ -78,8 +97,8 @@ class View_estudiantes_activos : AppCompatActivity() {
         this.findViewById<EditText>(R.id.semesterNew).setText(persona["semester"].toString())
         this.findViewById<EditText>(R.id.type_document).setText(persona["typeDocument"].toString())
         this.findViewById<EditText>(R.id.genderNew).setText(persona["gender"].toString())
+        this.findViewById<EditText>(R.id.statusNew).setText(persona["status"].toString())
         this.findViewById<EditText>(R.id.birthdateNew).setText(persona["birthdate"].toString())
-        this.findViewById<EditText>(R.id.phoneNew).setText(persona["phone"].toString())
 
         this.findViewById<TextView>(R.id.textView).visibility = View.GONE
         this.findViewById<TableLayout>(R.id.tb_programs_active).visibility = View.GONE
@@ -107,4 +126,6 @@ class View_estudiantes_activos : AppCompatActivity() {
     fun inactive(view: View){
         Toast.makeText(this, "Usuario No existente ${view.id.toString()}", Toast.LENGTH_SHORT).show()
     }
+
+
 }
