@@ -216,7 +216,7 @@
         android:layout_height="70dp"
         android:backgroundTint="#7BBF65"
         android:clickable="true"
-        android:onClick="createNewCourse"
+        android:onClick="cancelar"
         android:text="Cancelar"
         app:cornerRadius="40dp"
         app:layout_constraintBottom_toBottomOf="parent"

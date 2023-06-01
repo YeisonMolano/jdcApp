@@ -128,6 +128,12 @@ class View_estudiantes_activos : AppCompatActivity() {
         items = db.getAllStudentsByStatus("ACTIVE") as MutableList<Map<*, *>>;
     }
 
+    fun cancelar(view: View){
+        val intent: Intent = Intent(this, Ver_estudiantes::class.java).also {
+            startActivity(/* intent = */ it)
+        }
+    }
+
     fun isValid(): Boolean{
         return sharedPreferences.getString("documentPerson", "none")!!.toInt() != 0 && !this.findViewById<EditText>(R.id.semesterNew).text.equals("") &&
         !this.findViewById<EditText>(R.id.statusNew).text.toString().equals("") && !this.findViewById<EditText>(R.id.type_document).text.toString().equals("") &&
