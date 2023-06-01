@@ -141,7 +141,7 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
             db.execSQL(createTableInscriptionTeacher)
         }
 
-        var insertFirst = "INSERT INTO $TABLE_AUTHORITIES values (1049658454, 'Yeison', 'Molano', 1);"
+        var insertFirst = "INSERT INTO $TABLE_AUTHORITIES values (1049658454, 'admin', 'admin', 1);"
         var createAdmin = "INSERT INTO $TABLE_USER values (1049658454, 'Yeison Eduardo', 'Molano Lopez', 'kolokololoco79@gmail.com', 1049658454);"
         var insertRol = "INSERT INTO $TABLE_ROLE VALUES (1, 'ADMIN');"
         var insertRolUser = "INSERT INTO $TABLE_ROLE VALUES (2, 'USER');"
@@ -645,12 +645,14 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
     //Metodo que me permite hacer actualización de datos a la tabla user
     //Pharams: {numero de dentificación del usuario a editar, nombres nuevos, apellidos nuevos, correo electronico nuevo}
     //Return: {retorna true si el proceso se hace bien, false si hay algun problema al inserta los datos}
-    fun updateStudent(idStudent: Int, semester: String, statusStudent: String, typeDocument: String, gender: String, birthdate: String): Boolean{
+    fun updateStudent(idStudent: Int, semester: String, statusStudent: String, typeDocument: String, gender: String, birthdate: String, nombre: String, apellido: String): Boolean{
         try {
-            val createStudent = "UPDATE $TABLE_STUDENT (semester, statusStudent, typeDocument, gender, birdthdate)  VALUES ($semester, '$statusStudent' '$typeDocument', '$gender', '$birthdate') WHERE idStudent = $idStudent;"
+            val createStudent = "UPDATE $TABLE_STUDENT SET semester = $semester, statusStudent = '$statusStudent', typeDocument = '$typeDocument', gender = '$gender', birdthdate = '$birthdate' WHERE idStudent = $idStudent;"
+            val updateUser = "UPDATE $TABLE_USER SET name = '$nombre', lastName = '$apellido' WHERE numDocument = $idStudent;"
             println(createStudent)
             val db = this.writableDatabase
             db.execSQL(createStudent)
+            db.execSQL(updateUser)
             return true;
         }catch (e: Exception){
             return false;
@@ -718,8 +720,8 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
                 item = mapOf("idStudent" to students.getInt(0), "semester" to 1, "statusStudent" to "ACTIVE",
                     "numDocument" to students.getInt(0), "idProgram" to students.getInt(7),
                     "typeDocument" to students.getString(2), "gender" to students.getString(3),
-                    "birthdate" to students.getString(4), "phone" to students.getString(6), "name" to findUserById(students.getInt(0), 1)["name"] )
-                println(item)
+                    "birthdate" to students.getString(4), "phone" to students.getString(6), "name" to findUserById(students.getInt(0), 1)["name"],
+                    "lastName" to findUserById(students.getInt(0), 1)["lastName"])
                 items.add(item)
             }while (students.moveToNext())
         }else{
@@ -858,5 +860,11 @@ class OpenHelperDatabase(context: Context) : SQLiteOpenHelper(context, "REGISTRO
             println("La tabla esta vacía")
         }
         return items;
+    }
+
+    fun deleteStudent(id : Int){
+        var eliminar = "delete from $TABLE_STUDENT where idStudent = $id"
+        val db = this.writableDatabase
+        db.execSQL(eliminar)
     }
 }
