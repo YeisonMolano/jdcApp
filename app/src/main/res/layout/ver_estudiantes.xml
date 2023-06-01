@@ -7,6 +7,36 @@
     android:background="@mipmap/fondo_deg"
     tools:context=".Ver_estudiantes">
 
+    <ImageView
+        android:id="@+id/logo8"
+        android:layout_width="222dp"
+        android:layout_height="64dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.57"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@mipmap/logoo"/>
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="157dp"
+        android:layout_height="42dp"
+        android:layout_margin="10dp"
+        android:drawableLeft="@drawable/icono_pers"
+        android:text="Administrador"
+        android:textAlignment="gravity"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"/>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="414dp"
@@ -14,68 +44,69 @@
         android:layout_marginTop="88dp"
         android:text="Menu estudiantes"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="#B9BFCC"
         android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/estudiantes_pendientes"
         android:layout_width="313dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:backgroundTint="#D3C972"
         android:ems="10"
         android:onClick="viewStudents"
         android:padding="18dp"
         android:text="Estudiantes pendientes"
         android:textColor="#FFFFFF"
-        android:textSize="11sp"
+        android:textSize="13sp"
         app:cornerRadius="25dp"
         app:iconTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.262" />
+        app:layout_constraintVertical_bias="0.341" />
 
     <Button
         android:id="@+id/assign_materia"
         android:layout_width="313dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:backgroundTint="#D3C972"
         android:ems="10"
         android:onClick="viewActives"
         android:padding="18dp"
         android:text="Estudiantes activos"
         android:textColor="#FFFFFF"
-        android:textSize="11sp"
+        android:textSize="13sp"
         app:cornerRadius="25dp"
         app:iconTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.512" />
+        app:layout_constraintVertical_bias="0.517" />
 
     <Button
         android:id="@+id/students_active2"
         android:layout_width="313dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:backgroundTint="#D3C972"
         android:ems="10"
         android:onClick="viewInactives"
         android:padding="18dp"
         android:text="Estudiantes inactivos"
         android:textColor="#FFFFFF"
-        android:textSize="11sp"
+        android:textSize="13sp"
         app:cornerRadius="25dp"
         app:iconTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.758" />
+        app:layout_constraintVertical_bias="0.674"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

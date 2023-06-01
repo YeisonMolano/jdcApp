@@ -7,6 +7,36 @@
     android:background="@mipmap/fondo_deg"
     tools:context=".View_assign_materias">
 
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="157dp"
+        android:layout_height="42dp"
+        android:layout_margin="10dp"
+        android:drawableLeft="@drawable/icono_pers"
+        android:text="Administrador"
+        android:textAlignment="gravity"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <ImageView
+        android:id="@+id/logo9"
+        android:layout_width="222dp"
+        android:layout_height="64dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.57"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@mipmap/logoo" />
+
     <Button
         android:id="@+id/assign_materia_button"
         android:layout_width="313dp"
@@ -71,8 +101,9 @@
         android:layout_marginTop="88dp"
         android:text="Asignar materia"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="#B9BFCC"
         android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"

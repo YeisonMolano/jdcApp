@@ -11,7 +11,7 @@
         android:id="@+id/tituloPrincipal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Crear login"
+        android:text="Crear Cuenta"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
@@ -21,7 +21,7 @@
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.072" />
 
     <ImageView
         android:id="@+id/logo2"
@@ -192,14 +192,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="201dp"
-        android:layout_height="137dp"
+        android:layout_width="171dp"
+        android:layout_height="97dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.107"
+        app:layout_constraintVertical_bias="0.17"
         app:srcCompat="@mipmap/login" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

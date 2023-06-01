@@ -19,27 +19,46 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@mipmap/logoo" />
 
+
     <TextView
         android:id="@+id/textView_titulo_bien"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Formulario de Inscripción"
+        android:layout_width="407dp"
+        android:layout_height="89dp"
+        android:text="Formulario de Inscripción Estudiante"
         android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="30sp"
+        android:textColor="#B9BFCC"
+        android:textSize="38sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.053" />
 
+    <EditText
+        android:id="@+id/phoneInscriptionStudent"
+        android:layout_width="325dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="#8A7DA3CD"
+        android:backgroundTint="#FFFFFF"
+        android:ems="15"
+        android:freezesText="true"
+        android:hint="Telefono"
+        android:inputType="phone"
+        android:padding="10dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.758" />
 
     <EditText
         android:id="@+id/nameTeacherFalse"
         android:layout_width="325dp"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_margin="10dp"
         android:background="#8A7DA3CD"
         android:backgroundTint="#FFFFFF"
@@ -47,18 +66,18 @@
         android:enabled="false"
         android:inputType="textPersonName"
         android:padding="10dp"
-        android:textColorHint="#FFFFFF"
-        android:textSize="16sp"
+        android:textColor="#292E32"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.149" />
+        app:layout_constraintVertical_bias="0.251" />
 
     <EditText
         android:id="@+id/birthday"
-        android:layout_width="186dp"
-        android:layout_height="44dp"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
         android:layout_margin="10dp"
         android:background="#8A7DA3CD"
         android:backgroundTint="#FFFFFF"
@@ -72,15 +91,15 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.706"
+        app:layout_constraintHorizontal_bias="0.813"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39" />
+        app:layout_constraintVertical_bias="0.499" />
 
     <EditText
         android:id="@+id/lastNameTeacherFalse"
         android:layout_width="325dp"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_margin="10dp"
         android:background="#8A7DA3CD"
         android:backgroundTint="#FFFFFF"
@@ -88,19 +107,20 @@
         android:enabled="false"
         android:inputType="textPersonName"
         android:padding="10dp"
-        android:textColorHint="#FFFFFF"
-        android:textSize="16sp"
+        android:textColor="#292E32"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
 
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.225" />
+        app:layout_constraintVertical_bias="0.329" />
 
     <Spinner
         android:id="@+id/spinner_typeDocument"
         android:layout_width="325dp"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_margin="10dp"
         android:background="#8A7DA3CD"
         android:backgroundTint="#FFFFFF"
@@ -109,7 +129,53 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.303" />
+        app:layout_constraintVertical_bias="0.405" />
+
+    <Spinner
+        android:id="@+id/spinnerPrograma"
+        android:layout_width="325dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="#8A7DA3CD"
+        android:backgroundTint="#FFFFFF"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.678" />
+
+    <Spinner
+        android:id="@+id/spinner_genderStudent"
+        android:layout_width="325dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="#8A7DA3CD"
+        android:backgroundTint="#FFFFFF"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.591" />
+
+    <Button
+        android:id="@+id/button_birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#7BBF65"
+        android:onClick="mostrarDatePickerDialog"
+        android:text="Seleccionar"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        app:cornerRadius="35dp"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/birthday"
+        app:layout_constraintHorizontal_bias="0.58"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.49" />
 
     <Button
         android:id="@+id/boton_docente"
@@ -131,54 +197,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.904" />
 
-    <Spinner
-        android:id="@+id/spinnerPrograma"
-        android:layout_width="325dp"
-        android:layout_height="35dp"
-        android:layout_margin="10dp"
-        android:background="#8A7DA3CD"
-        android:backgroundTint="#FFFFFF"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.594" />
-
-    <Spinner
-        android:id="@+id/spinner_genderStudent"
-        android:layout_width="325dp"
-        android:layout_height="35dp"
-        android:layout_margin="10dp"
-        android:background="#8A7DA3CD"
-        android:backgroundTint="#FFFFFF"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.465"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.505" />
-
-    <EditText
-        android:id="@+id/phoneInscriptionStudent"
-        android:layout_width="325dp"
-        android:layout_height="35dp"
-        android:layout_margin="10dp"
-        android:background="#8A7DA3CD"
-        android:backgroundTint="#FFFFFF"
-        android:ems="15"
-        android:hint="Telefono"
-        android:inputType="phone"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.679" />
-
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
@@ -190,23 +208,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.838" />
-
-    <Button
-        android:id="@+id/button_birthday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#7BBF65"
-        android:onClick="mostrarDatePickerDialog"
-        android:text="Seleccionar"
-        android:textColor="#FFFFFF"
-        android:textSize="11sp"
-        app:cornerRadius="35dp"
-        app:iconTint="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.243"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
